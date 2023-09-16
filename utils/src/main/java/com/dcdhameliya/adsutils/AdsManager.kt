@@ -4,6 +4,7 @@ import android.app.Activity
 import android.content.Context
 import android.os.Handler
 import android.os.Looper
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.widget.*
@@ -650,6 +651,7 @@ class AdsManager(private var context: Context, var activity: Activity) {
     private fun loadInterstitialAdsBasedOnPriority(
         context: Context, adsPriority: ArrayList<Int>, priorityCount: Int
     ) {
+        Log.e("CUSTOM---->", "loadInterstitialAdsBasedOnPriority: " + adsPriority[priorityCount])
         if (adsPriority.size == priorityCount) {
             return
         }
@@ -785,19 +787,28 @@ class AdsManager(private var context: Context, var activity: Activity) {
 
 
     private fun showCustomInterstitialAds(context: Context) {
+        Log.e("CUSTOM----->", "showCustomInterstitialAds: ")
         onInterstitialCloseListener!!.onInterstitialCustomShow()
     }
 
     fun showInterstitial(activity: Context): AdsManager {
+        Log.e("CUSTOM----->", "showInterstitial: ")
 
         if (getData.isAdsOn()) {
             when (LOADED_ADS) {
                 ADS_ADMOB -> {
-                    admobInterstitialAd!!.show(activity as Activity)
+                    if (admobInterstitialAd != null)
+                        admobInterstitialAd!!.show(activity as Activity)
+                    else
+                        showCustomInterstitialAds(context)
                 }
 
                 ADS_FACEBOOK -> {
-                    facebookInterstitialAd!!.show()
+                    Log.e("CUSTOM----->", "showInterstitial: ")
+                    if (facebookInterstitialAd!!.isAdLoaded)
+                        facebookInterstitialAd!!.show()
+                    else
+                        showCustomInterstitialAds(context)
                 }
 
                 ADS_IRNSRC -> {
@@ -894,24 +905,6 @@ class AdsManager(private var context: Context, var activity: Activity) {
             onInterstitialCloseListener!!.onInterstitialClose(false)
         }
     }
-
-
-//    private val isNetworkConnected: Boolean
-//        get() {
-//            var result = false
-//            val cm = context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager?
-//            cm?.run {
-//                cm.getNetworkCapabilities(cm.activeNetwork)?.run {
-//                    result = when {
-//                        hasTransport(NetworkCapabilities.TRANSPORT_WIFI) -> true
-//                        hasTransport(NetworkCapabilities.TRANSPORT_CELLULAR) -> true
-//                        hasTransport(NetworkCapabilities.TRANSPORT_ETHERNET) -> true
-//                        else -> false
-//                    }
-//                }
-//            }
-//            return result
-//        }
 
 
     fun showRewardAds(currentActivity: Activity, onRewardedCloseListener: OnRewardAdsListener) {

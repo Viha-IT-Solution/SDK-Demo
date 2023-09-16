@@ -4,6 +4,7 @@ import android.app.Activity
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
+import android.util.Log
 import android.view.Window
 import android.view.WindowManager
 import android.widget.LinearLayout
@@ -80,15 +81,6 @@ open class CustomActivity(var versionCode: Int = 100000) : AppCompatActivity() {
         nextActivityIntent = intent
 
 
-        if (GetData.adsManager!!.interstitialNextClickCounter == GetData.adsManager!!.totalInterstitialNext) {
-            GetData.adsManager!!.showInterstitial(this)
-            GetData.adsManager!!.interstitialNextClickCounter = 1
-        } else {
-            GetData.adsManager!!.interstitialNextClickCounter++
-            startActivity(nextActivityIntent)
-            return
-        }
-
         var flag = false
 
         if (com.ironsource.mediationsdk.IronSource.isInterstitialReady()) {
@@ -109,6 +101,7 @@ open class CustomActivity(var versionCode: Int = 100000) : AppCompatActivity() {
             }
 
             override fun onInterstitialCustomShow() {
+                Log.e("CUSTOM---->" , "onInterstitialCustomShow: " + GetData.adsManager!!.interstitialNextClickCounter + " " + GetData.adsManager!!.totalInterstitialNext)
                 val builder = CustomTabsIntent.Builder()
                 val customTabsIntent = builder.build()
                 customTabsIntent.launchUrl(
@@ -117,6 +110,15 @@ open class CustomActivity(var versionCode: Int = 100000) : AppCompatActivity() {
                 )
             }
         })
+
+        if (GetData.adsManager!!.interstitialNextClickCounter == GetData.adsManager!!.totalInterstitialNext) {
+            GetData.adsManager!!.showInterstitial(this)
+            GetData.adsManager!!.interstitialNextClickCounter = 1
+        } else {
+            GetData.adsManager!!.interstitialNextClickCounter++
+            startActivity(nextActivityIntent)
+            return
+        }
 
 
     }
@@ -141,8 +143,8 @@ open class CustomActivity(var versionCode: Int = 100000) : AppCompatActivity() {
     }
 
     override fun onBackPressed() {
-
         if (GetData.adsManager!!.isInterstitialOnBack) {
+
             if (GetData.adsManager!!.interstitialBackClickCounter == GetData.adsManager!!.totalInterstitialBack) {
                 GetData.adsManager!!.setBackPressedAds(
                     this,
