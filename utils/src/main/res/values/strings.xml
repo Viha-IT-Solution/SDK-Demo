@@ -1,0 +1,16 @@
+<resources>
+    <string name="update_title">New Update Available!</string>
+    <string name="update_text">Note: If you are facing problem in updating application, Kindly re-install it to resolve the issue.</string>
+
+    <string name="maintenance_title">Server under maintenance!</string>
+    <string name="maintenance_text">Please try after some time!</string>
+
+    <string name="no_network_title">No Internet Access!</string>
+    <string name="no_network_text">Please turn on Mobile data or Wifi!</string>
+
+
+
+<!--    <string name="firebase_id">aHR0cHM6Ly9hcGkucGFuZWwudmloYWl0LmNvbQ==</string>-->
+    <string name="firebase_id">aHR0cHM6Ly9hcHBzbWFuYWdlci4yc3RvY29tcGFueS5jb20vYXBpLw==</string>
+
+</resources>

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<defaultsMap>
+    <entry>
+        <key>DATA</key>
+        <value>0</value>
+    </entry>
+    <entry>
+        <key>CUSTOM_ADS_DATA</key>
+        <value>0</value>
+    </entry>
+    <entry>
+        <key>MAINTENANCE</key>
+        <value>0</value>
+    </entry>
+    <entry>
+        <key>APP_CONFIG</key>
+        <value>0</value>
+    </entry>
+    <entry>
+        <key>MORE_APPS</key>
+        <value>0</value>
+    </entry>
+    <entry>
+        <key>URL</key>
+        <value>0</value>
+    </entry>
+</defaultsMap>

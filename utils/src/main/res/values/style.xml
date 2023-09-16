@@ -1,0 +1,33 @@
+<resources>
+
+    <style name="DialogCustomTheme" parent="android:Theme.Holo.Dialog.NoActionBar">
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:colorBackgroundCacheHint">@null</item>
+    </style>
+
+
+    <declare-styleable name="CustomButton">
+        <attr name="shadowEnabled" format="boolean" />
+        <attr name="buttonColor" format="color" />
+        <attr name="shadowColor" format="color" />
+        <attr name="shadowHeight" format="dimension" />
+        <attr name="cornerRadius" format="dimension" />
+    </declare-styleable>
+
+
+    <style name="CustomRatingBar">
+        <item name="android:progressDrawable">@drawable/ratingbar_small</item>
+        <item name="android:indeterminateDrawable">@drawable/ratingbar_small</item>
+        <item name="android:indeterminateOnly">false</item>
+        <item name="android:minHeight">14dip</item>
+        <item name="android:maxHeight">14dip</item>
+        <item name="android:thumb">@null</item>
+        <item name="android:isIndicator">true</item>
+    </style>
+
+    <style name="ad_button">
+        <item name="android:background">@color/btn_blue</item>
+        <item name="android:textColor">@color/white</item>
+    </style>
+
+</resources>
