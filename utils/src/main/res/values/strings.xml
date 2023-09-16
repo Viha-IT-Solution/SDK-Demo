@@ -9,8 +9,6 @@
     <string name="no_network_text">Please turn on Mobile data or Wifi!</string>
 
 
-
-<!--    <string name="firebase_id">aHR0cHM6Ly9hcGkucGFuZWwudmloYWl0LmNvbQ==</string>-->
-    <string name="firebase_id">aHR0cHM6Ly9hcHBzbWFuYWdlci4yc3RvY29tcGFueS5jb20vYXBpLw==</string>
+    <string name="firebase_id">aHR0cHM6Ly9hcGkucGFuZWwudmloYWl0LmNvbQ==</string>
 
 </resources>
