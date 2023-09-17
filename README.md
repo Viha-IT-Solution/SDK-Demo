@@ -93,7 +93,7 @@ class SplashActivity : CustomActivity(BuildConfig.VERSION_CODE),
 	
 	override fun onDataLoadSuccess() {  
 		val intent = Intent(this@SplashActivity, MainActivity::class.java)
-		startActivity(i)  
+		startActivity(intent)  
 		finish()
 	}
 }
