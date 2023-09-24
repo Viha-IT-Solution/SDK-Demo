@@ -4,11 +4,11 @@ plugins {
 }
 
 android {
-    namespace = "com.dcdhameliya.sdkdemo"
+    namespace = "com.viha.sdkdemo"
     compileSdk = 33
 
     defaultConfig {
-        applicationId = "com.dcdhameliya.sdkdemo"
+        applicationId = "com.viha.sdkdemo"
         minSdk = 24
         targetSdk = 33
         versionCode = 1
@@ -24,6 +24,17 @@ android {
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
             )
+            buildConfigField("int", "VERSION_CODE", "${defaultConfig.versionCode}")
+            buildConfigField("String", "VERSION_NAME", "\"${defaultConfig.versionName}\"")
+        }
+        debug {
+            isMinifyEnabled = false
+            proguardFiles(
+                getDefaultProguardFile("proguard-android-optimize.txt"),
+                "proguard-rules.pro"
+            )
+            buildConfigField("int", "VERSION_CODE", "${defaultConfig.versionCode}")
+            buildConfigField("String", "VERSION_NAME", "\"${defaultConfig.versionName}\"")
         }
     }
     compileOptions {
@@ -40,6 +51,7 @@ android {
 }
 
 dependencies {
+    implementation(project(mapOf("path" to ":utils")))
 
     implementation("androidx.core:core-ktx:1.10.1")
     implementation("androidx.appcompat:appcompat:1.6.1")
@@ -52,7 +64,6 @@ dependencies {
 
 //    Mandatory for onesignal, flurry, ads & SDK
 
-    implementation(project(mapOf("path" to ":utils")))
 
 //    implementation("androidx.annotation:annotation:1.6.0")
 //    implementation("com.facebook.android:audience-network-sdk:6.+") {

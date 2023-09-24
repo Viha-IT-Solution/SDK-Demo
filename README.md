@@ -65,6 +65,34 @@ Must have to add bellowed code in ```AndroidManifest.xml```  before the ```</app
 
 Now add the dependency to your app ```build.gradle```:
 ```groovy  
+android {
+    
+    ...
+
+    buildTypes {
+        release {
+            isMinifyEnabled = false
+            proguardFiles(
+                    getDefaultProguardFile("proguard-android-optimize.txt"),
+                    "proguard-rules.pro"
+            )
+            buildConfigField("int", "VERSION_CODE", "${defaultConfig.versionCode}")
+            buildConfigField("String", "VERSION_NAME", "\"${defaultConfig.versionName}\"")
+        }
+        debug {
+            isMinifyEnabled = false
+            proguardFiles(
+                    getDefaultProguardFile("proguard-android-optimize.txt"),
+                    "proguard-rules.pro"
+            )
+            buildConfigField("int", "VERSION_CODE", "${defaultConfig.versionCode}")
+            buildConfigField("String", "VERSION_NAME", "\"${defaultConfig.versionName}\"")
+        }
+    }
+    
+    ...
+}
+
 dependencies {  
 	 // if file name is build.gradle.kts then
 	 implementation(project(mapOf("path" to ":utils")))
@@ -112,7 +140,7 @@ class MyApplication : Application() {
 	  super.onCreate()  
 	  ...
 	  //To show App open ads
-	  com.dcdhameliya.adsutils.AppOpenManager(this)  
+	  com.adsutils.AppOpenManager(this)  
 	  ...
   }  
 }
