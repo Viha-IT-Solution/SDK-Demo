@@ -1,72 +1,45 @@
 
+
 # Android Ads SDK
 
 
 ## Setup Gradle
-Modified your root (project level)  ```settings.gradle``` as belowed code:
-```groovy  
-dependencyResolutionManagement {  
-  repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)  
-  repositories {  
-  google()  
-  mavenCentral()  
-  maven(url = "https://jitpack.io")  
-  maven(url = "https://android-sdk.is.com/")  
-  maven(url = "https://cboost.jfrog.io/artifactory/chartboost-ads/")  
-  maven(url = "https://imobile-maio.github.io/maven")  
-  maven(url = "https://dl-maven-android.mintegral.com/repository/mbridge_android_sdk_oversea")  
-  maven(url = "https://artifact.bytedance.com/repository/pangle")  
-  maven(url = "https://s3.amazonaws.com/smaato-sdk-releases/")  
-  maven(url = "https://aa-sdk.s3-eu-west-1.amazonaws.com/android_repo")  
-  maven(url = "https://sdk.tapjoy.com/")  
-  }  
-}
-...
 
-include(":utils")
+<h3>All gradle files must be .gradle.kts</h3>
 
+Modified your root (project level) ```settings.gradle.kts``` as belowed code:
+```groovy
+dependencyResolutionManagement {    
+  repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)    
+  repositories {    
+      google()    
+      mavenCentral()    
+      maven(url = "https://jitpack.io")    
+      maven(url = "https://android-sdk.is.com/")    
+      maven(url = "https://cboost.jfrog.io/artifactory/chartboost-ads/")    
+      maven(url = "https://imobile-maio.github.io/maven")    
+      maven(url = "https://dl-maven-android.mintegral.com/repository/mbridge_android_sdk_oversea")    
+      maven(url = "https://artifact.bytedance.com/repository/pangle")    
+      maven(url = "https://s3.amazonaws.com/smaato-sdk-releases/")    
+      maven(url = "https://aa-sdk.s3-eu-west-1.amazonaws.com/android_repo")    
+      maven(url = "https://sdk.tapjoy.com/")    
+    }
+}  
 
-```  
-
-
-Must have to add bellowed code in ```AndroidManifest.xml```  before the ```</application>``` :
-```xml
-
-<!-- Admob -->  
-<meta-data  
-  android:name="com.google.android.gms.ads.APPLICATION_ID"  
-  android:value="ca-app-pub-3940256099942544~3347511713" />  
-<meta-data  
-  android:name="com.google.android.gms.ads.AD_MANAGER_APP"  
-  android:value="true" />  
+...  
+  
+include(":utils")  
   
   
-<!-- IrnSrc -->  
-<activity  
-  android:name="com.ironsource.sdk.controller.ControllerActivity"  
-  android:configChanges="orientation|screenSize"  
-  android:hardwareAccelerated="true" />  
-<activity  
-  android:name="com.ironsource.sdk.controller.InterstitialActivity"  
-  android:configChanges="orientation|screenSize"  
-  android:hardwareAccelerated="true"  
-  android:theme="@android:style/Theme.Translucent" />  
-<activity  
-  android:name="com.ironsource.sdk.controller.OpenUrlActivity"  
-  android:configChanges="orientation|screenSize"  
-  android:hardwareAccelerated="true"  
-  android:theme="@android:style/Theme.Translucent" />  
-<provider  
-  android:name="com.ironsource.lifecycle.IronsourceLifecycleProvider"  
-  android:authorities="${applicationId}.IronsourceLifecycleProvider" />
-   
-  ```
+```   
 
 
-Now add the dependency to your app ```build.gradle```:
-```groovy  
+
+Now add the dependency to your app ```build.gradle.kts```:
+
+```groovy
+
 android {
-    
     ...
 
     buildTypes {
@@ -89,20 +62,56 @@ android {
             buildConfigField("String", "VERSION_NAME", "\"${defaultConfig.versionName}\"")
         }
     }
+    buildFeatures {
+        viewBinding = true
+        buildConfig = true
+    }
     
     ...
 }
 
-dependencies {  
-	 // if file name is build.gradle.kts then
-	 implementation(project(mapOf("path" to ":utils")))
-	 //else
-	 implementation project(path: ':utils')
-	 // Also implement admob ads sdk..
- }  
+dependencies {
+    api(project(mapOf("path" to ":utils")))
+}   
+
 ```  
 
-## Sertup SplashActivity.kt
+
+Must have to add bellowed code in ```AndroidManifest.xml``` before the ```</application>``` :
+```xml  
+
+<!-- Admob -->
+    <meta-data
+        android:name="com.google.android.gms.ads.APPLICATION_ID"
+        android:value="ca-app-pub-3940256099942544~3347511713" />
+    <meta-data
+        android:name="com.google.android.gms.ads.AD_MANAGER_APP"
+        android:value="true" />
+    
+    
+    <!-- IrnSrc -->
+    <activity
+        android:name="com.ironsource.sdk.controller.ControllerActivity"
+        android:configChanges="orientation|screenSize"
+        android:hardwareAccelerated="true" />
+    <activity
+        android:name="com.ironsource.sdk.controller.InterstitialActivity"
+        android:configChanges="orientation|screenSize"
+        android:hardwareAccelerated="true"
+        android:theme="@android:style/Theme.Translucent" />
+    <activity
+        android:name="com.ironsource.sdk.controller.OpenUrlActivity"
+        android:configChanges="orientation|screenSize"
+        android:hardwareAccelerated="true"
+        android:theme="@android:style/Theme.Translucent" />
+    
+    <provider
+        android:name="com.ironsource.lifecycle.IronsourceLifecycleProvider"
+        android:authorities="${applicationId}.IronsourceLifecycleProvider" />
+
+ ```  
+
+## Setup SplashActivity.kt
 splash screen name should be "SplashActivity.kt"
 
 ```SplashActivity.kt```
@@ -116,7 +125,7 @@ class SplashActivity : CustomActivity(BuildConfig.VERSION_CODE),
 		
 		super.onFetchDataListener = this
 		com.facebook.ads.AdSettings.setDataProcessingOptions(arrayOf<String>())  
-		com.google.android.gms.ads.MobileAds.initialize(this)run {}
+		com.google.android.gms.ads.MobileAds.initialize(this)
 	}
 	
 	override fun onDataLoadSuccess() {  
@@ -126,6 +135,8 @@ class SplashActivity : CustomActivity(BuildConfig.VERSION_CODE),
 	}
 }
 ```
+
+
 
 in other activities..
 
@@ -156,7 +167,7 @@ class MainActivity : CustomActivity() {
 	override fun onStart() {  
 		super.onStart()  
 		//For banner Ads  NOTE: Banner Ad Must Call before Native Ad.
-		showBanner(findViewById(R.id.adView))
+		showBannerAds(findViewById(R.id.adView))
 		//For Native Ad
 		showNativeAds(findViewById(R.id.nativeAdView))  
 		//For small native Ad
@@ -198,12 +209,6 @@ class MainActivity : CustomActivity() {
 }
 
 ```
-
-
-
-
-
-
 
 
 
