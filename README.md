@@ -155,6 +155,7 @@ class MyApplication : Application() {
 
 ```
 
+
 in other activities..
 
 ``` MainActivity.kt```
