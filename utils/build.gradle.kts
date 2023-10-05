@@ -8,8 +8,7 @@ android {
     namespace = "com"
 
     defaultConfig {
-        minSdkVersion(23)
-        targetSdkVersion(33)
+        minSdk = 24
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
@@ -47,11 +46,9 @@ dependencies {
     implementation ("com.github.bumptech.glide:glide:4.16.0")
     annotationProcessor ("com.github.bumptech.glide:compiler:4.16.0")
 
-    api ("com.google.android.gms:play-services-ads:22.2.0")
+    api ("com.google.android.gms:play-services-ads:22.4.0")
     api ("com.facebook.android:audience-network-sdk:6.15.0")
 
-    api("com.flurry.android:analytics:14.3.0@aar")
-    api("com.onesignal:OneSignal:5.0.0")
     api("com.google.android.gms:play-services-ads-identifier:18.0.1")
 
     api("com.google.android.gms:play-services-appset:16.0.2")
@@ -60,7 +57,7 @@ dependencies {
 //    api "com.android.support:customtabs:25.2.0"
 
     api ("androidx.lifecycle:lifecycle-extensions:2.2.0")
-    api ("androidx.lifecycle:lifecycle-runtime-ktx:2.6.1")
+    api ("androidx.lifecycle:lifecycle-runtime-ktx:2.6.2")
     //noinspection LifecycleAnnotationProcessorWithJava8
     annotationProcessor ("androidx.lifecycle:lifecycle-compiler:2.6.1")
 
