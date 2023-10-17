@@ -122,10 +122,14 @@ class SplashActivity : CustomActivity(BuildConfig.VERSION_CODE),
 	override fun onCreate(savedInstanceState: Bundle?) {  
 		super.onCreate(savedInstanceState)
 		setContentView(R.layout.activity_splash)
-		
+
+
 		super.onFetchDataListener = this
-		com.facebook.ads.AdSettings.setDataProcessingOptions(arrayOf<String>())  
+		com.facebook.ads.AdSettings.setDataProcessingOptions(arrayOf<String>())
+		com.facebook.ads.AudienceNetworkAds.initialize(applicationContext)
 		com.google.android.gms.ads.MobileAds.initialize(this)
+        	
+
 	}
 	
 	override fun onDataLoadSuccess() {  
